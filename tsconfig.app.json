@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true
+  },
+  "include": ["vite-env.d.ts", "src/**/*", "src/**/*.tsx"],
+  "exclude": ["src/**/__tests__/*"]
+}
