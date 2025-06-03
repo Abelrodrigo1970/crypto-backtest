@@ -128,9 +128,9 @@ Este software é apenas para fins educacionais e de pesquisa. Não deve ser usad
 
 ## 📫 Contato
 
-Abel Oliveira - [@seu_twitter](https://twitter.com/seu_twitter) - abelrodrigo101@gmail.com
+Abel Oliveira  - abelrodrigo101@gmail.com
 
-Link do Projeto: [https://github.com/seu-usuario/backtest_react](https://github.com/abelrodrigo1970/backtest_react)
+Link do Projeto: [https://github.com/abelrodrigo1970/backtest_react](https://github.com/abelrodrigo1970/backtest_react)
 
 ## 🙏 Agradecimentos
 
