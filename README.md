@@ -1,54 +1,53 @@
-# React + TypeScript + Vite
+# Backtest React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Um aplicativo React moderno para análise e backtesting de estratégias de trading, desenvolvido com TypeScript e Vite.
 
-Currently, two official plugins are available:
+## 🚀 Tecnologias
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [React](https://reactjs.org/) - Biblioteca JavaScript para construção de interfaces
+- [TypeScript](https://www.typescriptlang.org/) - Superset JavaScript com tipagem estática
+- [Vite](https://vitejs.dev/) - Build tool e servidor de desenvolvimento
+- [Tailwind CSS](https://tailwindcss.com/) - Framework CSS utilitário
+- [Recharts](https://recharts.org/) - Biblioteca de gráficos
+- [Lightweight Charts](https://www.tradingview.com/lightweight-charts/) - Biblioteca para gráficos financeiros
+- [Axios](https://axios-http.com/) - Cliente HTTP
+- [Date-fns](https://date-fns.org/) - Manipulação de datas
+- [PDF-lib](https://pdf-lib.js.org/) - Manipulação de PDFs
 
-## Expanding the ESLint configuration
+## 📋 Pré-requisitos
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Node.js (versão 18 ou superior)
+- npm ou yarn
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 🔧 Instalação
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/seu-usuario/backtest_react.git
+cd backtest_react
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+2. Instale as dependências:
+```bash
+npm install
+# ou
+yarn install
 ```
+
+3. Inicie o servidor de desenvolvimento:
+```bash
+npm run dev
+# ou
+yarn dev
+```
+
+O aplicativo estará disponível em `http://localhost:5173`
+
+## 🛠️ Scripts Disponíveis
+
+- `npm run dev` - Inicia o servidor de desenvolvimento
+- `npm run build` - Compila o projeto para produção
+- `npm run lint` - Executa o linter
+- `npm run preview` - Visualiza a versão de produção localmente
+
+## 📦 Estrutura do Projeto
