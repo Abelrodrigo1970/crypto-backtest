@@ -1,5 +1,5 @@
 import { Strategy, StrategyParams } from './types';
-import { Kline, Trade, Timeframe } from '../types';
+import { Kline, Trade } from '../types';
 import { calculateTradeSize } from '../utils/timeframeUtils';
 
 const calculateEMA = (prices: number[], period: number): number[] => {

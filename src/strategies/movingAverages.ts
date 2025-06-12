@@ -1,6 +1,6 @@
 // src/strategies/movingAverages.ts
 import { Strategy, StrategyParams } from './types';
-import { Kline, Trade, Timeframe } from '../types';
+import { Kline, Trade } from '../types';
 import { calculateTradeSize } from '../utils/timeframeUtils';
 
 const calculateSMA = (prices: number[], period: number): number[] => {

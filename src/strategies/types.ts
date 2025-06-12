@@ -1,4 +1,4 @@
-import { Kline, Trade, Timeframe } from '../types';
+import { Kline, Trade } from '../types';
 
 export interface StrategyParams {
   initialCapital: number;
