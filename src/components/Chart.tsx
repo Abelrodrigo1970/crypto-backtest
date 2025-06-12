@@ -37,7 +37,7 @@ export const Chart: React.FC<ChartProps> = ({
   const longMA = calculateSMA(closes, longPeriod);
 
   const chartData: ChartDataPoint[] = klines.map((kline, index) => ({
-    time: format(new Date(kline.openTime), 'yyyy-MM-dd HH:mm'),
+    time: format(new Date(kline.openTime), 'MM-dd HH:mm'),
     price: kline.close,
     shortMA: shortMA[index],
     longMA: longMA[index],
@@ -47,45 +47,67 @@ export const Chart: React.FC<ChartProps> = ({
   const formatTooltipLabel = (label: string) => `Time: ${label}`;
 
   return (
-    <div className="w-full h-[600px] p-4 bg-white rounded-lg shadow">
+    <div className="w-full h-[500px] bg-gradient-to-br from-gray-50 to-white rounded-lg">
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={chartData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" />
+        <LineChart 
+          data={chartData} 
+          margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
+        >
+          <CartesianGrid strokeDasharray="3 3" stroke="#e0e7ff" opacity={0.7} />
           <XAxis
             dataKey="time"
-            tick={{ fontSize: 12 }}
-            tickFormatter={(value: string) => value.split(' ')[1]}
+            tick={{ fontSize: 11, fill: '#6b7280' }}
+            tickFormatter={(value: string) => value}
+            angle={-45}
+            textAnchor="end"
+            height={60}
+            interval="preserveStartEnd"
           />
           <YAxis
-            domain={['auto', 'auto']}
-            tick={{ fontSize: 12 }}
-            tickFormatter={(value: number) => value.toFixed(4)}
+            domain={['dataMin - 0.01', 'dataMax + 0.01']}
+            tick={{ fontSize: 11, fill: '#6b7280' }}
+            tickFormatter={(value: number) => `$${value.toFixed(2)}`}
+            width={80}
           />
           <Tooltip
             formatter={formatTooltipValue}
             labelFormatter={formatTooltipLabel}
+            contentStyle={{
+              backgroundColor: '#f8fafc',
+              border: '1px solid #e2e8f0',
+              borderRadius: '8px',
+              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+            }}
           />
-          <Legend />
+          <Legend 
+            wrapperStyle={{ paddingTop: '20px' }}
+          />
           <Line
             type="monotone"
             dataKey="price"
-            stroke="#8884d8"
+            stroke="#3b82f6"
+            strokeWidth={2}
             dot={false}
             name="Price"
+            activeDot={{ r: 4, fill: '#3b82f6' }}
           />
           <Line
             type="monotone"
             dataKey="shortMA"
-            stroke="#82ca9d"
+            stroke="#10b981"
+            strokeWidth={2}
             dot={false}
-            name={`${shortPeriod} MA`}
+            name={`MA ${shortPeriod}`}
+            strokeDasharray="5 5"
           />
           <Line
             type="monotone"
             dataKey="longMA"
-            stroke="#ffc658"
+            stroke="#f59e0b"
+            strokeWidth={2}
             dot={false}
-            name={`${longPeriod} MA`}
+            name={`MA ${longPeriod}`}
+            strokeDasharray="10 5"
           />
         </LineChart>
       </ResponsiveContainer>

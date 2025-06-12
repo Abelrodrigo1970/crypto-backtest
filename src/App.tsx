@@ -131,82 +131,87 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      <div className="container mx-auto px-4 py-8 max-w-7xl">
-        <header className="mb-12 text-center">
+      <div className="container mx-auto px-4 py-8 max-w-full">
+        <header className="mb-8 text-center">
           <h1 className="text-4xl font-bold text-gray-900 mb-2">Crypto Backtest</h1>
           <p className="text-gray-600">Test your trading strategies with historical data</p>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Left Column - Controls */}
-          <div className="lg:col-span-4 space-y-6">
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl">
-              <SymbolSelector
-                selectedSymbol={selectedSymbol}
-                selectedTimeframe={selectedTimeframe}
-                startDate={startDate}
-                endDate={endDate}
-                onSymbolChange={setSelectedSymbol}
-                onTimeframeChange={setSelectedTimeframe}
-                onDateRangeChange={(start, end) => {
-                  setStartDate(start);
-                  setEndDate(end);
-                }}
-                availableSymbols={availableSymbols}
-              />
-            </div>
+        {/* Top Controls Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+          {/* Symbol Selection */}
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl">
+            <SymbolSelector
+              selectedSymbol={selectedSymbol}
+              selectedTimeframe={selectedTimeframe}
+              startDate={startDate}
+              endDate={endDate}
+              onSymbolChange={setSelectedSymbol}
+              onTimeframeChange={setSelectedTimeframe}
+              onDateRangeChange={(start, end) => {
+                setStartDate(start);
+                setEndDate(end);
+              }}
+              availableSymbols={availableSymbols}
+            />
+          </div>
 
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl">
-              <StrategySelector
-                selectedStrategy={selectedStrategy}
-                onStrategyChange={setSelectedStrategy}
-                onParamsChange={handleStrategyParamsChange}
-              />
-            </div>
+          {/* Strategy Selection */}
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl">
+            <StrategySelector
+              selectedStrategy={selectedStrategy}
+              onStrategyChange={setSelectedStrategy}
+              onParamsChange={handleStrategyParamsChange}
+            />
+          </div>
 
-            <div className="bg-white rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:shadow-xl">
-              <h2 className="text-xl font-semibold text-gray-900 mb-6">Backtest Parameters</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Initial Capital
-                  </label>
-                  <input
-                    type="number"
-                    value={strategyParams.initialCapital}
-                    onChange={(e) =>
-                      setStrategyParams({
-                        ...strategyParams,
-                        initialCapital: parseFloat(e.target.value)
-                      })
-                    }
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Trade Percentage
-                  </label>
-                  <input
-                    type="number"
-                    value={strategyParams.tradePercentage}
-                    onChange={(e) =>
-                      setStrategyParams({
-                        ...strategyParams,
-                        tradePercentage: parseFloat(e.target.value)
-                      })
-                    }
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
-                  />
-                </div>
+          {/* Backtest Parameters */}
+          <div className="bg-white rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:shadow-xl">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">Parameters</h2>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Initial Capital
+                </label>
+                <input
+                  type="number"
+                  value={strategyParams.initialCapital}
+                  onChange={(e) =>
+                    setStrategyParams({
+                      ...strategyParams,
+                      initialCapital: parseFloat(e.target.value)
+                    })
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Trade Percentage
+                </label>
+                <input
+                  type="number"
+                  value={strategyParams.tradePercentage}
+                  onChange={(e) =>
+                    setStrategyParams({
+                      ...strategyParams,
+                      tradePercentage: parseFloat(e.target.value)
+                    })
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                />
               </div>
             </div>
+          </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+          {/* Action Buttons */}
+          <div className="bg-white rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:shadow-xl">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">Actions</h2>
+            <div className="space-y-3">
               <button
                 onClick={handleRunBacktest}
                 disabled={isLoading || !selectedSymbol || klines.length === 0}
-                className="flex-1 bg-indigo-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 transform transition-all duration-200 hover:scale-105 disabled:hover:scale-100"
+                className="w-full bg-indigo-600 text-white px-4 py-3 rounded-lg font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 transform transition-all duration-200 hover:scale-105 disabled:hover:scale-100"
               >
                 {isLoading ? (
                   <span className="flex items-center justify-center">
@@ -223,55 +228,55 @@ function App() {
               {results && (
                 <button
                   onClick={handleExportPDF}
-                  className="flex-1 bg-green-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transform transition-all duration-200 hover:scale-105"
+                  className="w-full bg-green-600 text-white px-4 py-3 rounded-lg font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transform transition-all duration-200 hover:scale-105"
                 >
                   Export PDF
                 </button>
               )}
             </div>
           </div>
-
-          {/* Right Column - Results */}
-          <div className="lg:col-span-8 space-y-6">
-            {error && (
-              <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-lg shadow-md">
-                <div className="flex">
-                  <div className="flex-shrink-0">
-                    <svg className="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <div className="ml-3">
-                    <p className="text-sm">{error}</p>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {klines.length > 0 && (
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl">
-                <div className="p-6">
-                  <h2 className="text-xl font-semibold text-gray-900 mb-4">Price Chart</h2>
-                  <Chart
-                    klines={klines}
-                    trades={results?.trades || []}
-                    shortPeriod={strategyParams.shortPeriod || 20}
-                    longPeriod={strategyParams.longPeriod || 50}
-                  />
-                </div>
-              </div>
-            )}
-
-            {results && (
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl">
-                <div className="p-6">
-                  <h2 className="text-xl font-semibold text-gray-900 mb-4">Backtest Results</h2>
-                  <BacktestResults results={results} />
-                </div>
-              </div>
-            )}
-          </div>
         </div>
+
+        {/* Error Message */}
+        {error && (
+          <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded-lg shadow-md mb-6">
+            <div className="flex">
+              <div className="flex-shrink-0">
+                <svg className="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="ml-3">
+                <p className="text-sm">{error}</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Chart Section - Full Width */}
+        {klines.length > 0 && (
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl mb-6">
+            <div className="p-6">
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">Price Chart</h2>
+              <Chart
+                klines={klines}
+                trades={results?.trades || []}
+                shortPeriod={strategyParams.shortPeriod || 20}
+                longPeriod={strategyParams.longPeriod || 50}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Results Section - Full Width */}
+        {results && (
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-xl">
+            <div className="p-6">
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">Backtest Results</h2>
+              <BacktestResults results={results} />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
