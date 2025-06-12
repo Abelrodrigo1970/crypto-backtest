@@ -5,7 +5,7 @@ import { Chart } from './components/Chart';
 import { BacktestResults } from './components/BacktestResults';
 import { binanceService } from './services/binanceService';
 import { strategies } from './strategies';
-import { exportToPDF } from './utils/pdfExport.ts';
+import { exportToPDF } from './utils/pdfExport';
 import { Kline, Timeframe, BacktestResult } from './types';
 import { StrategyParams } from './strategies/types';
 
@@ -75,7 +75,7 @@ function App() {
 
     try {
       const strategy = strategies[selectedStrategy];
-      const strategyResults = strategy.run(klines, strategyParams, selectedTimeframe);
+      const strategyResults = strategy.run(klines, strategyParams);
       const backtestResult: BacktestResult = {
         ...strategyResults,
         capital: strategyParams.initialCapital,

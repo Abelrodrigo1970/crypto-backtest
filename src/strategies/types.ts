@@ -18,5 +18,5 @@ export interface Strategy {
   name: string;
   description: string;
   defaultParams: StrategyParams;
-  run: (klines: Kline[], params: StrategyParams, timeframe: Timeframe) => StrategyResult;
+  run: (klines: Kline[], params: StrategyParams) => StrategyResult;
 }

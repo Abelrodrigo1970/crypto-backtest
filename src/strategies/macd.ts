@@ -52,7 +52,7 @@ export const macdStrategy: Strategy = {
     initialCapital: 1000,
     tradePercentage: 10
   },
-  run: (klines: Kline[], params: StrategyParams, timeframe: Timeframe) => {
+  run: (klines: Kline[], params: StrategyParams) => {
     const trades: Trade[] = [];
     let currentCapital = params.initialCapital;
 
