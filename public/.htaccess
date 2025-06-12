@@ -1,8 +1,25 @@
 AddType application/javascript .js
 AddType application/javascript .mjs
-AddType application/javascript .ts
-AddType application/javascript .tsx
+AddType text/javascript .js
+AddType module .js
+
+<IfModule mod_mime.c>
+    AddType application/javascript .js
+    AddType application/javascript .mjs
+    AddType text/css .css
+    AddType text/html .html
+</IfModule>
 
 <IfModule mod_headers.c>
     Header set X-Content-Type-Options "nosniff"
+    Header always set Content-Security-Policy "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';"
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /crypto-backtest/
+    RewriteRule ^index\.html$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /crypto-backtest/index.html [L]
 </IfModule> 
