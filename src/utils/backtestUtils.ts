@@ -1,5 +1,18 @@
 import { Kline } from '../types';
 
+export const calculateSMA = (data: number[], period: number): number[] => {
+  const sma: number[] = [];
+  for (let i = 0; i < data.length; i++) {
+    if (i < period - 1) {
+      sma.push(0);
+      continue;
+    }
+    const sum = data.slice(i - period + 1, i + 1).reduce((a, b) => a + b, 0);
+    sma.push(sum / period);
+  }
+  return sma;
+};
+
 export const calculateReturns = (klines: Kline[]): number[] => {
   return klines.map((kline, index) => {
     if (index === 0) return 0;

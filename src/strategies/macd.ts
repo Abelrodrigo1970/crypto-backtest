@@ -71,13 +71,11 @@ export const macdStrategy: Strategy = {
     for (let i = params.slowPeriod || 26; i < klines.length; i++) {
       const currentPrice = klines[i].close;
       const currentTime = klines[i].openTime;
-      const currentMACD = macdLine[i];
-      const currentSignal = signalLine[i];
       const currentHistogram = histogram[i];
       const prevHistogram = histogram[i - 1];
 
-      // Calculate trade size based on current capital and timeframe
-      const tradeSize = calculateTradeSize(currentCapital, params.tradePercentage, timeframe);
+      // Calculate trade size based on current capital
+      const tradeSize = calculateTradeSize(currentCapital, params.tradePercentage);
 
       // Buy signal: MACD crosses above signal line
       if (currentHistogram > 0 && prevHistogram <= 0 && position !== 'LONG') {

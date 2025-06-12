@@ -1,5 +1,9 @@
 import { Timeframe } from '../types';
 
+export const calculateTradeSize = (capital: number, tradePercentage: number): number => {
+  return capital * (tradePercentage / 100);
+};
+
 export const timeframeToMilliseconds = (timeframe: Timeframe): number => {
   const unit = timeframe.slice(-1);
   const value = parseInt(timeframe.slice(0, -1));
