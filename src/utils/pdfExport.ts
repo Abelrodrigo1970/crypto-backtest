@@ -11,7 +11,7 @@ export const exportToPDF = async (
 ): Promise<Uint8Array> => {
   const pdfDoc = await PDFDocument.create();
   const page = pdfDoc.addPage([595.28, 841.89]); // A4 size
-  const { width, height } = page.getSize();
+  const { height } = page.getSize();
   const fontSize = 12;
 
   // Add title

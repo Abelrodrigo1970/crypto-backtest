@@ -61,8 +61,8 @@ export const movingAveragesStrategy: Strategy = {
       const prevShortSMA = shortSMA[smaIndex - 1];
       const prevLongSMA = longSMA[smaIndex - 1];
 
-      // Calculate trade size based on current capital and timeframe
-      const tradeSize = calculateTradeSize(currentCapital, params.tradePercentage, timeframe);
+      // Calculate trade size based on current capital
+      const tradeSize = calculateTradeSize(currentCapital, params.tradePercentage);
 
       // Buy signal: Short SMA crosses above Long SMA
       if (currentShortSMA > currentLongSMA && prevShortSMA <= prevLongSMA && position !== 'LONG') {

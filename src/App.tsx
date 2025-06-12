@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { SymbolSelector } from './components/SymbolSelector';
 import { StrategySelector } from './components/StrategySelector';
 import { Chart } from './components/Chart';

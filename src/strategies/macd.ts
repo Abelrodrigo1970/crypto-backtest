@@ -57,7 +57,7 @@ export const macdStrategy: Strategy = {
     let currentCapital = params.initialCapital;
 
     const closes = klines.map(k => k.close);
-    const { macdLine, signalLine, histogram } = calculateMACD(
+    const { histogram } = calculateMACD(
       closes,
       params.fastPeriod || 12,
       params.slowPeriod || 26,
