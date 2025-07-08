@@ -23,7 +23,7 @@ app.get('/api/pairs', async (req, res) => {
   try {
     const collector = new DataCollector();
     const pairs = await collector.getFuturesPairs();
-    res.json({ success: true, pairs: pairs.slice(0, 100) }); // Limitar a 100 para performance
+    res.json({ success: true, pairs: pairs.slice(0, 30) }); // Limitar a 30 para performance
   } catch (error) {
     logger.error('Erro ao obter pares:', error);
     res.status(500).json({ success: false, error: error.message });
@@ -78,12 +78,18 @@ app.post('/api/backtest', async (req, res) => {
 app.get('/api/top-pairs/:count?', async (req, res) => {
   try {
     const count = parseInt(req.params.count) || 50;
-    const engine = new BacktestEngine({});
-    const pairs = await engine.getPairs();
+    const collector = new DataCollector();
+    const pairs = await collector.getFuturesPairs();
+    
+    // Ordenar por volume e pegar os top N
+    const topPairs = pairs
+      .sort((a, b) => b.quoteVolume - a.quoteVolume)
+      .slice(0, count)
+      .map(pair => pair.symbol);
     
     res.json({ 
       success: true, 
-      pairs: pairs.slice(0, count) 
+      pairs: topPairs 
     });
   } catch (error) {
     logger.error('Erro ao obter top pares:', error);

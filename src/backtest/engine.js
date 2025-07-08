@@ -106,10 +106,10 @@ class BacktestEngine {
           parseFloat(ticker.quoteVolume) > 0
         )
         .sort((a, b) => parseFloat(b.quoteVolume) - parseFloat(a.quoteVolume))
-        .slice(0, 250) // Pega os 250 primeiros
+        .slice(0, 30) // Pega os 30 primeiros
         .map(ticker => ticker.symbol);
       
-      console.log(colors.green(`✅ Top 250 pares USDT selecionados por volume 24h`));
+      console.log(colors.green(`✅ Top 30 pares USDT selecionados por volume 24h`));
       console.log(colors.yellow(`🏆 Top 5: ${rankedPairs.slice(0, 5).join(', ')}`));
       
       // Log dos volumes dos top 10 para referência
@@ -126,7 +126,7 @@ class BacktestEngine {
         console.log(colors.white(`   ${(index + 1).toString().padStart(2)}: ${pair.symbol.padEnd(12)} - ${pair.volume}`));
       });
       
-      logger.info(`Top 250 pares USDT selecionados: ${rankedPairs.slice(0, 10).join(', ')}...`);
+      logger.info(`Top 30 pares USDT selecionados: ${rankedPairs.slice(0, 10).join(', ')}...`);
       
       return rankedPairs;
       
