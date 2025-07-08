@@ -23,7 +23,7 @@ app.get('/api/pairs', async (req, res) => {
   try {
     const collector = new DataCollector();
     const pairs = await collector.getFuturesPairs();
-    res.json({ success: true, pairs: pairs.slice(0, 30) }); // Limitar a 30 para performance
+    res.json({ success: true, pairs: pairs.slice(0, 230) }); // Limitar a 230 para performance
   } catch (error) {
     logger.error('Erro ao obter pares:', error);
     res.status(500).json({ success: false, error: error.message });

@@ -80,10 +80,10 @@ class BacktestEngine {
           parseFloat(ticker.quoteVolume) > 0
         )
         .sort((a, b) => parseFloat(b.quoteVolume) - parseFloat(a.quoteVolume))
-        .slice(0, 30) // Pega os 30 primeiros
+        .slice(0, 230) // Pega os 230 primeiros
         .map(ticker => ticker.symbol);
       
-      logger.info(`Top 30 pares USDT selecionados: ${rankedPairs.slice(0, 10).join(', ')}...`);
+      logger.info(`Top 230 pares USDT selecionados: ${rankedPairs.slice(0, 10).join(', ')}...`);
       
       return rankedPairs;
       
